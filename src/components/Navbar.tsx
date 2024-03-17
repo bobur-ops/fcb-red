@@ -1,24 +1,41 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
 
 const Navbar = () => {
   return (
     <>
       <div className="flex px-2 flex-col md:flex-row md:items-center gap-4 md:gap-[126px] container mx-auto py-[61px]">
-        <Link to={"/"}>
+        <NavLink to={"/"}>
           <div className="w-[135px] h-[26px]">
             <img src="./logo.png" />
           </div>
-        </Link>
+        </NavLink>
         <div className="flex-1 flex-col md:flex-row flex gap-[14px] md:gap-[50px] md:items-center">
-          <Link to={"/services"}>
-            <div className="p-[14px]">Услуги</div>
-          </Link>
-          <Link to={"/portfolio"}>
-            <div className="p-[14px]">Портфолио</div>
-          </Link>
-          <Link to={"/#"}>
+          <NavLink
+            className={({ isActive }) =>
+              twMerge(
+                isActive && " text-white bg-[#70DFFF] rounded-[25px] w-fit",
+                "px-[13px] py-[6px]"
+              )
+            }
+            to={"/services"}
+          >
+            <div className="">Услуги</div>
+          </NavLink>
+          <NavLink
+            className={({ isActive }) =>
+              twMerge(
+                isActive && " text-white bg-[#70DFFF] rounded-[25px] w-fit",
+                "px-[13px] py-[6px]"
+              )
+            }
+            to={"/portfolio"}
+          >
+            <div className="">Портфолио</div>
+          </NavLink>
+          <NavLink to={"#contacts"}>
             <div className="p-[14px]">Контакты</div>
-          </Link>
+          </NavLink>
         </div>
       </div>
     </>

@@ -7,15 +7,15 @@ const Form = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
 
   return (
-    <div className="grid gap-[101px] md:grid-cols-2 mt-[60px] md:mt-[200px]">
+    <div className="container px-5 mx-auto grid gap-[101px] md:grid-cols-2 mt-[60px] md:mt-[200px]">
       <div className="">
         <div className="py-[50px] px-[45px] rounded-[25px] bg-[#F2F2F2]">
-          <div className="mb-[23px] text-[36px] font-semibold">
+          <div className="mb-[23px] text-[24px] md:text-[36px] font-semibold">
             Перезвоните мне
           </div>
           <div className="mb-2.5">
             <input
-              className="w-full outline-none border-none py-2 px-3 rounded-[47px] text-[22px]"
+              className="w-full outline-none border-none py-2 px-3 rounded-[47px] text-[20px] md:text-[22px]"
               placeholder="ФИО"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
@@ -23,7 +23,7 @@ const Form = () => {
           </div>
           <div className="mb-2.5">
             <input
-              className="w-full outline-none border-none py-2 px-3 rounded-[47px] text-[22px]"
+              className="w-full outline-none border-none py-2 px-3 rounded-[47px] text-[20px] md:text-[22px]"
               placeholder="Телефон"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
@@ -39,8 +39,8 @@ const Form = () => {
           </button>
         </div>
       </div>
-      <div className="">
-        <div className="flex gap-[11px] mb-[54px]">
+      <div className="" id="contacts">
+        <div className="flex flex-wrap gap-[11px] mb-[54px]">
           <div className="w-[130px]">
             Адрес <br />{" "}
             <Link
@@ -52,18 +52,18 @@ const Form = () => {
               на карте
             </Link>
           </div>
-          <div className="max-w-[250px]">
+          <div className="max-w-[280px] text-[#4B4B4B]">
             Бизнес-центр «Инконель» проспект Мустакиллик, 75 Ташкент, 100000,
             Узбекистан
           </div>
         </div>
-        <div className="flex mb-5">
+        <div className="flex flex-wrap mb-5">
           <div className="w-[130px]">Звоните</div>
           <div className="">
             +998 90-354-74-71 <br /> +998 78-120-74-71
           </div>
         </div>
-        <div className="flex">
+        <div className="flex flex-wrap">
           <div className="w-[130px]">Пишите</div>
           <div className="text-[#28C3F2]">fcbred@fcbartgroup.com</div>
         </div>
