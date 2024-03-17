@@ -4,6 +4,7 @@ import Navbar from "./components/Navbar";
 import ServicesPage from "./pages/services";
 import PortfolioPage from "./pages/portfolio";
 import Form from "./components/Form";
+import PortfolioId from "./pages/portfolio/id";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/" index element={<HomePage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/portfolio/:id" element={<PortfolioId />} />
         </Routes>
 
         <Form />

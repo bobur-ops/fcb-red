@@ -17,27 +17,27 @@ export default function HomePage() {
       <div className="container  px-5 mx-auto -mt-[200px]">
         <div className="flex flex-col items-center md:items-start md:flex-row relative z-20 justify-center gap-12 mt-[82px]">
           <div className="">
-            <img src="./awards-1.png" className="mx-auto mb-[23px]" />
+            <img src="/awards-1.png" className="mx-auto mb-[23px]" />
             <div className="text-center max-w-[265px]">
               Most Awarded Year Ever – Effie, Reggie, Pro, Ogilvy Arf And Cannes
               Lion Awards
             </div>
           </div>
           <div className="">
-            <img src="./awards-2.png" className="mx-auto mb-[23px]" />
+            <img src="/awards-2.png" className="mx-auto mb-[23px]" />
             <div className="text-center max-w-[265px]">
               #1 Ranked Shopper Marketing Agency
             </div>
           </div>
           <div className="">
-            <img src="./awards-3.png" className="mx-auto mb-[23px]" />
+            <img src="/awards-3.png" className="mx-auto mb-[23px]" />
             <div className="text-center max-w-[265px]">
               #1 ranked marketing services agency on promo 100 since 5 years, #1
               ranked in retail
             </div>
           </div>
         </div>
-        <img src="./divider.png" className="ml-auto mt-[87px] pl-5" />
+        <img src="/divider.png" className="ml-auto mt-[87px] pl-5" />
         <div className="max-w-[950px] mx-auto mt-[94px] text-[20px] leading-[30px] md:leading-[52px] md:text-[36px] mb-[47px] md:mb-[100px]">
           Наша компания занимается полным комплексом услуг Торгового
           Маркетинга. Мы увеличиваем продажи, воздействуя на все процессы
@@ -46,7 +46,7 @@ export default function HomePage() {
         <div className="grid grid-cols-3">
           <div className="space-y-[100px] hidden md:block">
             <div className="mx-auto w-[320px]">
-              <img src="./cola.png" className=" h-[320px]" />
+              <img src="/cola.png" className=" h-[320px]" />
               <div className="mt-[30px] text-[#28C3F2] text-[48px] mb-[22px] underline">
                 Coca-Cola
               </div>
@@ -56,7 +56,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="mx-auto w-[320px]">
-              <img src="./sherin.png" className=" h-[320px]" />
+              <img src="/sherin.png" className=" h-[320px]" />
               <div className="mt-[30px] text-[#28C3F2] text-[48px] mb-[22px] underline">
                 Sherin
               </div>
