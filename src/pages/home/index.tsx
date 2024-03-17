@@ -14,7 +14,7 @@ export default function HomePage() {
         <div className="absolute z-10 :h-[457px] bg-gradient-to-b from-transparent to-white w-full bottom-0 left-0"></div>
       </div>
 
-      <div className="container  px-5 mx-auto -mt-[200px]">
+      <div className="container px-5 mx-auto -mt-[200px]">
         <div className="flex flex-col items-center md:items-start md:flex-row relative z-20 justify-center gap-12 mt-[82px]">
           <div className="">
             <img src="/awards-1.png" className="mx-auto mb-[23px]" />

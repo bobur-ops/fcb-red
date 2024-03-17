@@ -1,10 +1,15 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { FaListUl } from "react-icons/fa6";
 import { PiSignOutBold } from "react-icons/pi";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import { twMerge } from "tailwind-merge";
+import { useBoolean, useOnClickOutside } from "usehooks-ts";
 
 export default function AdminLayout() {
   const navigate = useNavigate();
+  const sidebarOpen = useBoolean(false);
+  const sidebarRef = useRef(null);
+  useOnClickOutside(sidebarRef, () => sidebarOpen.setFalse());
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -21,6 +26,7 @@ export default function AdminLayout() {
         data-drawer-toggle="default-sidebar"
         aria-controls="default-sidebar"
         type="button"
+        onClick={() => sidebarOpen.toggle()}
         className="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200"
       >
         <span className="sr-only">Open sidebar</span>
@@ -41,7 +47,11 @@ export default function AdminLayout() {
 
       <aside
         id="default-sidebar"
-        className="fixed border-r top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
+        className={twMerge(
+          "fixed border-r top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0",
+          sidebarOpen.value && "translate-x-0"
+        )}
+        ref={sidebarRef}
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50">
