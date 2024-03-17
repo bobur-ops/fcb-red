@@ -47,7 +47,7 @@ const deleteConsultation = async (id: number) => {
 export default function AdminPage() {
   const queryClient = useQueryClient();
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["consultations"],
     queryFn: getConsultations,
   });
@@ -85,6 +85,19 @@ export default function AdminPage() {
           <div className="text-center">Дата</div>
           <div className="text-center">Действия</div>
         </div>
+
+        {isLoading && (
+          <div className="flex items-center justify-center">
+            <div
+              className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-e-transparent align-[-0.125em] text-surface motion-reduce:animate-[spin_1.5s_linear_infinite] text-black"
+              role="status"
+            >
+              <span className="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                Loading...
+              </span>
+            </div>
+          </div>
+        )}
 
         {data?.map((c) => (
           <div
