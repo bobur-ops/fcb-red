@@ -5,10 +5,10 @@ export const data = [
   },
   {
     id: "2",
-    title: "Coca-Cola",
+    title: "Nobel",
   },
   {
     id: "3",
-    title: "Coca-Cola",
+    title: "Sherin",
   },
 ];
