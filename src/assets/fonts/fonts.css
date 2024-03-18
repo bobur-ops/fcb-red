@@ -1,18 +1,18 @@
 @font-face {
   font-family: "Calvino";
-  src: url("Calvino-Grande-Regular-trial.ttf") format("truetype");
+  src: url("nvrfnshd-display.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "CodeNext";
-  src: url("CodeNext-Trial-Regular.woff2") format("woff2");
+  src: url("CodeNext-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "CodeNext";
-  src: url("CodeNext-Trial-Bold.woff2") format("woff2");
+  src: url("CodeNext-Bold.ttf") format("truetype");
   font-weight: bold;
   font-style: normal;
 }
