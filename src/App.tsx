@@ -9,6 +9,7 @@ import AdminPage from "./pages/admin";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import LoginPage from "./pages/login";
 import { Toaster } from "react-hot-toast";
+import ScrollToHashElement from "./components/ScrolltoHashElement";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ function App() {
             </Route>
             <Route path="/login" element={<LoginPage />} />
           </Routes>
+          <ScrollToHashElement />
         </Router>
         <Toaster />
       </QueryClientProvider>

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function HomePage() {
   return (
     <>
-      <div className="bg-[url('./header.png')] bg-center bg-cover pt-[80px] pb-[200px] relative">
+      <div className="bg-[url('/header.png')] bg-center bg-cover pt-[80px] pb-[200px] relative">
         <div className="container mx-auto">
           <div className="text-white ml-[43px] text-[45px] md:text-[96px] leading-[50px] md:leading-[100px] max-w-[723px] calvino">
             The First <br /> International <br /> Trade <br /> Marketing <br />{" "}

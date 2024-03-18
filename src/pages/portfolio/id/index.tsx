@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { data } from "../../../mockdata";
+import { useEffect } from "react";
 
 const sections = [
   "Картонные стойки",
@@ -74,6 +75,10 @@ export default function PortfolioId() {
   const { id } = useParams();
 
   const item = data.find((item) => item.id === id);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="container px-5 mx-auto lg:pl-[305px]">
