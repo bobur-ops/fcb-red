@@ -66,6 +66,15 @@ export default function AdminLayout() {
               </Link>
             </li>
             <li>
+              <Link
+                to={"/admin/site"}
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+              >
+                <FaListUl />
+                <span className="ms-3">Сайт</span>
+              </Link>
+            </li>
+            <li>
               <div
                 onClick={() => {
                   localStorage.removeItem("token");
