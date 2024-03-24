@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { CiTextAlignCenter } from "react-icons/ci";
 import { FaListUl } from "react-icons/fa6";
 import { PiSignOutBold } from "react-icons/pi";
 import { Link, Outlet, useNavigate } from "react-router-dom";
@@ -72,6 +73,15 @@ export default function AdminLayout() {
               >
                 <FaListUl />
                 <span className="ms-3">Сайт</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/admin/texts"}
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+              >
+                <CiTextAlignCenter />
+                <span className="ms-3">Тексты</span>
               </Link>
             </li>
             <li>

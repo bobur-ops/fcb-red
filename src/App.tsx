@@ -11,6 +11,7 @@ import LoginPage from "./pages/login";
 import { Toaster } from "react-hot-toast";
 import ScrollToHashElement from "./components/ScrolltoHashElement";
 import SitePage from "./pages/admin/site";
+import TextsPage from "./pages/admin/texts";
 
 const queryClient = new QueryClient();
 
@@ -29,6 +30,7 @@ function App() {
             <Route path="/admin" element={<AdminLayout />}>
               <Route index element={<AdminPage />} />
               <Route path="/admin/site" element={<SitePage />} />
+              <Route path="/admin/texts" element={<TextsPage />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />
           </Routes>
