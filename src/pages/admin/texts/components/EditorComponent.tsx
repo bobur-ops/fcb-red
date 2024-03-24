@@ -16,7 +16,7 @@ interface EditorComponentProps {
   editorId: string;
   defaultData?: string;
   onChange?: (data: any) => void;
-  value: any;
+  readonly?: boolean;
 }
 
 const EditorComponent = ({
@@ -24,10 +24,10 @@ const EditorComponent = ({
   editorId,
   defaultData,
   onChange,
+  readonly = false,
 }: EditorComponentProps) => {
   const ejInstance = useRef<EditorJS | null>(null);
   let editor: any = { isReady: false };
-  console.log(defaultData);
 
   const DEFAULT_INITIAL_DATA = {
     time: new Date().getTime(),
@@ -46,14 +46,7 @@ const EditorComponent = ({
         const content = await editor.saver.save();
         onChange(content);
       },
-      tools: {
-        // header: Header,
-        // image: Image,
-        // list: List,
-        // embed: Embed,
-        // link: Link,
-        // quote: Quote,
-      },
+      readOnly: readonly,
       placeholder: placeholder || "Type something...",
     });
   };

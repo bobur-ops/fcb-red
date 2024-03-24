@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 const Navbar = () => {
   return (
     <>
-      <div className="flex px-2 flex-col md:flex-row md:items-center gap-4 md:gap-[126px] container mx-auto py-[61px]">
+      <div className="flex px-2 flex-col md:flex-row md:items-center gap-4 md:gap-[126px] container mx-auto py-[61px] ">
         <NavLink to={"/"}>
           <div className="w-[135px] h-[26px]">
             <img src="/logo.png" />
@@ -14,13 +14,13 @@ const Navbar = () => {
           <NavLink
             className={({ isActive }) =>
               twMerge(
-                isActive && " text-white bg-[#70DFFF] rounded-[25px] w-fit",
+                isActive && " text-white bg-[#70DFFF] rounded-[25px] w-fit ",
                 "px-[13px] py-[6px]"
               )
             }
             to={"/services"}
           >
-            <div className="">Услуги</div>
+            <div className="text-[27px] font-[CodeNext]">Услуги</div>
           </NavLink>
           <NavLink
             className={({ isActive }) =>
@@ -31,10 +31,10 @@ const Navbar = () => {
             }
             to={"/portfolio"}
           >
-            <div className="">Портфолио</div>
+            <div className="text-[27px]">Портфолио</div>
           </NavLink>
           <NavLink to={"#contacts"}>
-            <div className="p-[14px]">Контакты</div>
+            <div className="p-[14px] text-[27px]">Контакты</div>
           </NavLink>
         </div>
       </div>

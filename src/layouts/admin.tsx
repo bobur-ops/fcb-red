@@ -1,6 +1,8 @@
 import { useEffect, useRef } from "react";
 import { CiTextAlignCenter } from "react-icons/ci";
 import { FaListUl } from "react-icons/fa6";
+import { LiaAwardSolid } from "react-icons/lia";
+import { MdWork } from "react-icons/md";
 import { PiSignOutBold } from "react-icons/pi";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
@@ -82,6 +84,24 @@ export default function AdminLayout() {
               >
                 <CiTextAlignCenter />
                 <span className="ms-3">Тексты</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/admin/awards"}
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+              >
+                <LiaAwardSolid />
+                <span className="ms-3">Награды</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                to={"/admin/portfolio"}
+                className="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group"
+              >
+                <MdWork />
+                <span className="ms-3">Портфолио</span>
               </Link>
             </li>
             <li>

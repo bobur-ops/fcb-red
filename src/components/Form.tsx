@@ -1,15 +1,22 @@
 import { useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
-import { FiPlus } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 import { axiosInstance } from "../config/axios";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 interface ReqFields {
   name: string;
   phoneNumber: string;
 }
+
+const getSiteInfo = async () => {
+  const {
+    data: { data },
+  } = await axiosInstance.get("api/home/site");
+
+  return data;
+};
 
 const postConsultation = async (fields: ReqFields) => {
   const { data } = await axiosInstance.post("api/home/consultation", fields);
@@ -22,6 +29,11 @@ const postConsultation = async (fields: ReqFields) => {
 const Form = () => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+
+  const { data } = useQuery({
+    queryKey: ["site-info"],
+    queryFn: getSiteInfo,
+  });
 
   const { mutate, isPending, isError, isSuccess, reset } = useMutation({
     mutationKey: ["consultation"],
@@ -105,12 +117,12 @@ const Form = () => {
           {renderForm()}
         </div>
       </div>
-      <div className="" id="contacts">
+      <div className="text-[22px]" id="contacts">
         <div className="flex flex-wrap gap-[11px] mb-[54px]">
           <div className="w-[130px]">
             Адрес <br />{" "}
             <Link
-              to={"https://maps.app.goo.gl/ZXLApn1V1jDWHPPj7"}
+              to={data?.mapUrl}
               target="_blank"
               className="text-[#28C3F2] underline"
             >
@@ -118,31 +130,18 @@ const Form = () => {
               на карте
             </Link>
           </div>
-          <div className="max-w-[280px] text-[#4B4B4B]">
-            Бизнес-центр «Инконель» проспект Мустакиллик, 75 Ташкент, 100000,
-            Узбекистан
-          </div>
+          <div className="max-w-[280px] text-[#4B4B4B]">{data?.address}</div>
         </div>
         <div className="flex flex-wrap mb-5">
           <div className="w-[130px]">Звоните</div>
           <div>
-            <div className="flex items-center">
-              <span>
-                <FiPlus />
-              </span>
-              998 90-354-74-71 <br />
-            </div>
-            <div className="flex items-center">
-              <span>
-                <FiPlus />
-              </span>
-              998 78-120-74-71
-            </div>
+            <div className="flex items-center">{data?.phoneNumber}</div>
+            <div className="flex items-center">{data?.officePhoneNumber}</div>
           </div>
         </div>
         <div className="flex flex-wrap">
           <div className="w-[130px]">Пишите</div>
-          <div className="text-[#28C3F2]">fcbred@fcbartgroup.com</div>
+          <div className="text-[#28C3F2]">{data?.email}</div>
         </div>
       </div>
     </div>
