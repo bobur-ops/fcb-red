@@ -53,7 +53,7 @@ export default function HomePage() {
           className="absolute w-full h-full top-0 left-0 object-cover object-center"
           src="/header-2.png"
         />
-        <div className="container mx-auto">
+        <div className="container mx-auto relative z-10">
           <div className="text-white ml-[43px] text-[45px] md:text-[96px] leading-[50px] md:leading-[100px] max-w-[723px] calvino">
             The First <br /> International <br /> Trade <br /> Marketing <br />{" "}
             Agency
