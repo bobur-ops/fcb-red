@@ -1,95 +1,11 @@
-import { Button, Loader, TextInput } from "@mantine/core";
-// import { useGetAwards } from "./queries";
-import { useState } from "react";
-import { useGetPortfolio } from "./queries";
-// import { useCreateAward, useDeleteAward, useUpdateAward } from "./mutations";
+import { Button, Loader } from "@mantine/core";
+import { useGetPortfolioList } from "./queries";
+import { Link } from "react-router-dom";
 
-const AwardComponent = ({
-  data,
-  orderCode,
-}: {
-  data?: any;
-  orderCode: number;
-}) => {
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const [imageBase64, setImageBase64] = useState("");
-  const [name, setName] = useState(data?.name || "");
+export default function AdminPortfolioPage() {
+  const { data, isLoading } = useGetPortfolioList();
 
-  // const { mutate: createMutation } = useCreateAward();
-  // const { mutate: deleteMutation } = useDeleteAward();
-  // const { mutate: updateMutation } = useUpdateAward();
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    setSelectedFileName(file?.name || "");
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setImageBase64(base64String);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  return (
-    <div>
-      <div className="flex items-center gap-5">
-        <div className="flex-1">
-          <TextInput
-            defaultValue={data?.name}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Введите..."
-          />
-        </div>
-        <div className="relative">
-          <input
-            className="absolute w-full h-full left-0 top-0 z-10 opacity-0"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-          <Button>{selectedFileName || "Выберите фотографию"}</Button>
-        </div>
-      </div>
-      <div className="flex gap-2 mt-2">
-        {data && (
-          <Button
-            onClick={() => {
-              // deleteMutation(data.id);
-            }}
-            color="red"
-          >
-            Удалить
-          </Button>
-        )}
-        <Button
-          onClick={() => {
-            if (data) {
-              // updateMutation({
-              //   id: data.id,
-              //   name,
-              //   orderCode,
-              //   awardImage: imageBase64 || data.awardImage,
-              // });
-            } else {
-              // createMutation({ name, orderCode, awardImage: imageBase64 });
-              setName("");
-            }
-          }}
-        >
-          Сохранить
-        </Button>
-      </div>
-    </div>
-  );
-};
-
-export default function AwardsPage() {
-  const { data: portfolio, isLoading } = useGetPortfolio();
-
-  console.log(portfolio);
+  console.log(data);
 
   if (isLoading) {
     return (
@@ -102,15 +18,27 @@ export default function AwardsPage() {
   return (
     <>
       <div className="mb-10">
-        <div className="text-2xl font-semibold">Портфолио</div>
-      </div>
-      <div className="space-y-10">
-        {portfolio?.map((item: any) => (
-          <>
-            <AwardComponent orderCode={item.orderCode} data={item} />
-          </>
-        ))}
-        <AwardComponent orderCode={portfolio.length + 1} />
+        <div className="flex justify-between items-center">
+          <div className="text-2xl font-semibold mb-5">Портфолио</div>
+          <Link to={"/admin/portfolio/create"}>
+            <Button>Создать</Button>
+          </Link>
+        </div>
+        {!data ? (
+          <>Ничего не найдено</>
+        ) : (
+          <div className="grid gap-[90px] md:grid-cols-3">
+            {data.map((item) => (
+              <Link
+                to={`/admin/portfolio/${item.id}`}
+                key={item.id}
+                className="flex cursor-pointer items-center justify-center px-10 py-[104px] rounded-[25px] border"
+              >
+                <img crossOrigin="anonymous" src={item.portfolioLogoImage} />
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

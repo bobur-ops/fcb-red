@@ -14,6 +14,8 @@ import SitePage from "./pages/admin/site";
 import TextsPage from "./pages/admin/texts";
 import AwardsPage from "./pages/admin/awards";
 import AdminPortfolioPage from "./pages/admin/portfolio";
+import PortfolioItemPage from "./pages/admin/portfolio/PortfolioItem";
+import NewPortfolioItem from "./pages/admin/portfolio/NewPortfolioItem";
 
 const queryClient = new QueryClient();
 
@@ -34,6 +36,14 @@ function App() {
               <Route path="/admin/site" element={<SitePage />} />
               <Route path="/admin/texts" element={<TextsPage />} />
               <Route path="/admin/portfolio" element={<AdminPortfolioPage />} />
+              <Route
+                path="/admin/portfolio/:id"
+                element={<PortfolioItemPage />}
+              />
+              <Route
+                path="/admin/portfolio/create"
+                element={<NewPortfolioItem />}
+              />
               <Route path="/admin/awards" element={<AwardsPage />} />
             </Route>
             <Route path="/login" element={<LoginPage />} />

@@ -1,7 +1,8 @@
-import { Button, Loader, TextInput } from "@mantine/core";
+import { Button, Loader, Textarea } from "@mantine/core";
 import { useGetAwards } from "./queries";
 import { useState } from "react";
 import { useCreateAward, useDeleteAward, useUpdateAward } from "./mutations";
+import { BaseDropzone } from "../portfolio/PortfolioItem/Dropzone";
 
 const AwardComponent = ({
   data,
@@ -10,46 +11,31 @@ const AwardComponent = ({
   data?: any;
   orderCode: number;
 }) => {
-  const [selectedFileName, setSelectedFileName] = useState("");
-  const [imageBase64, setImageBase64] = useState("");
   const [name, setName] = useState(data?.name || "");
+  const [image, setImage] = useState<string | null>(data?.imageUrl || null);
 
   const { mutate: createMutation } = useCreateAward();
   const { mutate: deleteMutation } = useDeleteAward();
   const { mutate: updateMutation } = useUpdateAward();
 
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files && event.target.files[0];
-    setSelectedFileName(file?.name || "");
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setImageBase64(base64String);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   return (
-    <div>
+    <div className="space-y-5">
+      <div className="">
+        <BaseDropzone
+          image={image}
+          onImageUpload={(value) => setImage(value)}
+          dropzoneClassname="h-[250px] flex items-center justify-center"
+        />
+      </div>
       <div className="flex items-center gap-5">
         <div className="flex-1">
-          <TextInput
+          <Textarea
+            resize="vertical"
             defaultValue={data?.name}
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Введите..."
           />
-        </div>
-        <div className="relative">
-          <input
-            className="absolute w-full h-full left-0 top-0 z-10 opacity-0"
-            type="file"
-            accept="image/*"
-            onChange={handleFileChange}
-          />
-          <Button>{selectedFileName || "Выберите фотографию"}</Button>
         </div>
       </div>
       <div className="flex gap-2 mt-2">
@@ -70,11 +56,12 @@ const AwardComponent = ({
                 id: data.id,
                 name,
                 orderCode,
-                awardImage: imageBase64 || data.awardImage,
+                awardImage: image as string,
               });
             } else {
-              createMutation({ name, orderCode, awardImage: imageBase64 });
+              createMutation({ name, orderCode, awardImage: image as string });
               setName("");
+              setImage(null);
             }
           }}
         >
@@ -87,8 +74,6 @@ const AwardComponent = ({
 
 export default function AwardsPage() {
   const { data: awards, isLoading } = useGetAwards();
-
-  console.log(awards);
 
   if (isLoading) {
     return (
@@ -103,7 +88,7 @@ export default function AwardsPage() {
       <div className="mb-10">
         <div className="text-2xl font-semibold">Награды</div>
       </div>
-      <div className="space-y-10">
+      <div className="grid grid-cols-3 gap-5">
         {awards?.map((item: any) => (
           <>
             <AwardComponent orderCode={item.orderCode} data={item} />

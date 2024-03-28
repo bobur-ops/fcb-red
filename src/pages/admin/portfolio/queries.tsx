@@ -1,7 +1,16 @@
 import { useQuery } from "@tanstack/react-query";
 import { axiosInstance } from "../../../config/axios";
 
-const getPortfolio = async () => {
+export interface PortfolioItem {
+  id: number;
+  portfolioImage: string;
+  portfolioLogoImage: string;
+  name: string;
+  description: string;
+  orderCode: number;
+}
+
+const getPorfolioList = async () => {
   const {
     data: { data },
   } = await axiosInstance.get("api/portfolio", {
@@ -10,12 +19,12 @@ const getPortfolio = async () => {
     },
   });
 
-  return data;
+  return data as PortfolioItem[];
 };
 
-export const useGetPortfolio = () => {
+export const useGetPortfolioList = () => {
   return useQuery({
-    queryKey: ["portfolio"],
-    queryFn: getPortfolio,
+    queryKey: ["portfolio-list"],
+    queryFn: getPorfolioList,
   });
 };

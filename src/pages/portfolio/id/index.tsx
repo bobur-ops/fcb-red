@@ -1,43 +1,54 @@
 import { useParams } from "react-router-dom";
-import { data } from "../../../mockdata";
-import { useEffect } from "react";
 
-const sections = [
-  "Картонные стойки",
-  "Тележки для RGB",
-  "Корона на холодильник",
-  "Солнце-защитник для холодильников ",
-  "Стикер на стол",
-  "Лента для обрамления",
-  "Напольный дисплей",
-  "Стоппер",
-];
+import { useEffect, useState } from "react";
+import { axiosInstance } from "../../../config/axios";
+import { useQuery } from "@tanstack/react-query";
+import { Loader } from "@mantine/core";
 
-const SectionComponent = ({ title }: { title: string }) => {
+interface SectionComponentProps {
+  data: {
+    id: number;
+    name: string;
+    orderCode: number;
+    images: {
+      image: string;
+    }[];
+  };
+}
+
+const SectionComponent = ({ data }: SectionComponentProps) => {
+  const [currentImage, setCurrentImage] = useState(0);
+
   return (
     <div>
-      <div className="text-[24px] tmd:text-[36px] mb-[50px]">{title}</div>
+      <div className="text-[24px] tmd:text-[36px] mb-[50px]">{data.name}</div>
       <div className="hidden md:grid grid-cols-3 gap-5">
-        <img
-          className="w-[320px] h-[265px] rounded-[5px]"
-          src="/portfolio-id.png"
-        />
-        <img
-          className="w-[320px] h-[265px] rounded-[5px]"
-          src="/portfolio-id.png"
-        />
-        <img
-          className="w-[320px] h-[265px] rounded-[5px]"
-          src="/portfolio-id.png"
-        />
+        {data.images.map((item, index) => (
+          <img
+            className="w-[320px] h-[265px] rounded-[5px]"
+            src={item.image}
+            key={index}
+          />
+        ))}
       </div>
       <div className="md:hidden">
         <img
           className="w-full object-cover object-center h-[265px] rounded-[5px] mx-auto mb-5"
-          src="/portfolio-id.png"
+          src={data.images[currentImage].image}
         />
         <div className="flex justify-end gap-5">
-          <div className="size-[70px] bg-[#70DFFF20] rounded-full cursor-pointer flex items-center justify-center">
+          <div
+            onClick={() => {
+              setCurrentImage((prev) => {
+                if (prev === 0) {
+                  return data.images.length - 1;
+                }
+
+                return prev - 1;
+              });
+            }}
+            className="size-[70px] bg-[#70DFFF20] rounded-full cursor-pointer flex items-center justify-center"
+          >
             <svg
               width="23"
               height="18"
@@ -51,7 +62,18 @@ const SectionComponent = ({ title }: { title: string }) => {
               />
             </svg>
           </div>
-          <div className="size-[70px] bg-[#70DFFF20] rounded-full cursor-pointer flex items-center justify-center">
+          <div
+            onClick={() => {
+              setCurrentImage((prev) => {
+                if (data.images.length < prev + 2) {
+                  return 0;
+                }
+
+                return prev + 1;
+              });
+            }}
+            className="size-[70px] bg-[#70DFFF20] rounded-full cursor-pointer flex items-center justify-center"
+          >
             <svg
               width="23"
               height="18"
@@ -71,25 +93,52 @@ const SectionComponent = ({ title }: { title: string }) => {
   );
 };
 
+const getCategory = async (id: string) => {
+  const {
+    data: { data },
+  } = await axiosInstance.get(`api/home/portfolio/category/list/${id}`);
+
+  return data;
+};
+
 export default function PortfolioId() {
   const { id } = useParams();
 
-  const item = data.find((item) => item.id === id);
+  const { data, isLoading } = useQuery({
+    queryKey: ["portfolio-list", id],
+    queryFn: () => getCategory(`${id}`),
+  });
+
+  console.log(data);
+
+  // const item = data.find((item) => item.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
     <div className="container px-5 mx-auto lg:pl-[305px]">
-      <div className="mb-[82px] text-[64px] md:text-[147px] calvino">
-        {item?.title}
-      </div>
+      <div className="mb-[82px] text-[64px] md:text-[147px] calvino">TItle</div>
       <img src="/divider.png" className="ml-auto mb-[87px] pl-5 w-full" />
       <div className="space-y-[100px]">
-        {sections.map((section, index) => (
-          <SectionComponent title={section} key={index} />
-        ))}
+        {!data?.length ? (
+          <div>Ничего не найдено</div>
+        ) : (
+          <>
+            {data.map((section: any, index: number) => (
+              <SectionComponent data={section} key={index} />
+            ))}
+          </>
+        )}
       </div>
     </div>
   );
