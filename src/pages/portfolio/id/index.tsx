@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../../../config/axios";
-import { useQuery } from "@tanstack/react-query";
+import { useQueries, useQuery } from "@tanstack/react-query";
 import { Loader } from "@mantine/core";
 
 interface SectionComponentProps {
@@ -101,23 +101,35 @@ const getCategory = async (id: string) => {
   return data;
 };
 
+const getPortfolio = async (id: string) => {
+  const {
+    data: { data },
+  } = await axiosInstance.get(`api/home/portfolio/${id}`);
+
+  return data;
+};
+
 export default function PortfolioId() {
   const { id } = useParams();
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["portfolio-list", id],
-    queryFn: () => getCategory(`${id}`),
+  const [category, item] = useQueries({
+    queries: [
+      {
+        queryKey: ["portfolio-list", id],
+        queryFn: () => getCategory(`${id}`),
+      },
+      {
+        queryKey: ["portfolio-item", id],
+        queryFn: () => getPortfolio(`${id}`),
+      },
+    ],
   });
-
-  console.log(data);
-
-  // const item = data.find((item) => item.id === id);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) {
+  if (category.isLoading) {
     return (
       <div className="flex items-center justify-center">
         <Loader />
@@ -127,14 +139,16 @@ export default function PortfolioId() {
 
   return (
     <div className="container px-5 mx-auto lg:pl-[305px]">
-      <div className="mb-[82px] text-[64px] md:text-[147px] calvino">TItle</div>
+      <div className="mb-[82px] text-[64px] md:text-[147px] calvino">
+        {item.data?.name}
+      </div>
       <img src="/divider.png" className="ml-auto mb-[87px] pl-5 w-full" />
       <div className="space-y-[100px]">
-        {!data?.length ? (
+        {!category.data?.length ? (
           <div>Ничего не найдено</div>
         ) : (
           <>
-            {data.map((section: any, index: number) => (
+            {category.data.map((section: any, index: number) => (
               <SectionComponent data={section} key={index} />
             ))}
           </>
