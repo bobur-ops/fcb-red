@@ -48,18 +48,17 @@ export default function HomePage() {
 
   return (
     <>
-      <div className="bg-[url('/header.png')] bg-center bg-cover pt-[80px] pb-[200px] relative">
+      <div className="bg-[url('/header.png')] bg-center bg-cover pt-[112px] pb-[200px] relative">
         <img
           className="absolute w-full h-full top-0 left-0 object-cover object-center"
           src="/header-2.png"
         />
-        <div className="container mx-auto relative z-10">
+        <div className="container mx-auto relative z-10 pb-[200px]">
           <div className="text-white ml-[43px] text-[45px] md:text-[96px] leading-[50px] md:leading-[100px] max-w-[723px] calvino">
-            The First <br /> International <br /> Trade <br /> Marketing <br />{" "}
-            Agency
+            The First <br /> International <br /> Trade Marketing <br /> Agency
           </div>
         </div>
-        <div className="absolute z-10 :h-[457px] bg-gradient-to-b from-transparent to-white w-full bottom-0 left-0"></div>
+        <div className="absolute z-10 h-[437px] bg-gradient-to-b from-transparent to-white w-full bottom-0 left-0"></div>
       </div>
 
       <div className="container px-5 mx-auto -mt-[200px]">
@@ -96,7 +95,7 @@ export default function HomePage() {
                 <div className="mx-auto w-[320px]">
                   <img
                     src={item.portfolioImage}
-                    className="object-cover object-center h-[320px]"
+                    className="object-cover object-center h-[320px] rounded-[25px]"
                   />
                   <div className="mt-[30px] text-[#28C3F2] text-[48px] mb-[22px] underline">
                     {item.name}

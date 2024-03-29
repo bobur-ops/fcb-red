@@ -73,18 +73,22 @@ const Form = () => {
         <div className="mb-[23px] text-[24px] md:text-[36px] font-semibold">
           Перезвоните мне
         </div>
-        <div className="mb-2.5">
+        <div className="mb-2.5 relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10 text-[20px] md:text-[22px] font-semibold">
+            ФИО
+          </div>
           <input
-            className="w-full outline-none border-none py-2 px-3 rounded-[47px] text-[20px] md:text-[22px] focus:ring-2 focus:ring-[#28C3F2]"
-            placeholder="ФИО"
+            className="w-full outline-none border-none py-2 pr-3 pl-[70px] rounded-[47px] text-[20px] md:text-[22px] focus:ring-2 focus:ring-[#28C3F2]"
             value={fullName}
             onChange={(e) => setFullName(e.target.value)}
           />
         </div>
-        <div className="mb-2.5">
+        <div className="mb-2.5 relative">
+          <div className="absolute left-3 top-1/2 transform -translate-y-1/2 z-10 text-[20px] md:text-[22px] font-semibold">
+            Телефон
+          </div>
           <input
-            className="w-full outline-none py-2 px-3 rounded-[47px] text-[20px] md:text-[22px] focus:ring-2 focus:ring-[#28C3F2] font-sans"
-            placeholder="Телефон"
+            className="w-full outline-none border-none py-2 pr-3 pl-[115px] rounded-[47px] text-[20px] md:text-[22px] focus:ring-2 focus:ring-[#28C3F2]"
             value={phoneNumber}
             onChange={(e) => setPhoneNumber(e.target.value)}
           />

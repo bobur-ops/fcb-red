@@ -96,6 +96,7 @@ const CategoryComponent = ({ portfolioId, data }: CategoryComponentProps) => {
               </Button>
             </div>
             <BaseDropzone
+              dropzoneClassname="h-[320px]"
               key={index}
               image={image}
               onImageUpload={(image) => {
@@ -114,6 +115,7 @@ const CategoryComponent = ({ portfolioId, data }: CategoryComponentProps) => {
           onImageUpload={(value) => {
             setImages((prev) => [...prev, value]);
           }}
+          dropzoneClassname="h-[320px]"
         />
       </div>
     </div>
