@@ -26,17 +26,14 @@ export function BaseDropzone(props: BaseDropzoneProps) {
       onReject={(files) => console.log("rejected files", files)}
       maxSize={5 * 1024 ** 2}
       accept={IMAGE_MIME_TYPE}
-      classNames={{ inner: " max-h-[350px]" }}
-      className={twMerge(
-        "max-h-[350px]  overflow-hidden",
-        props.dropzoneClassname
-      )}
+      classNames={{ inner: "flex justify-center" }}
+      className={twMerge("", props.dropzoneClassname)}
       {...props}
     >
       {props.image ? (
-        <div className="flex items-center justify-center max-h-[350px]">
+        <div className="flex w-[320px] h-[300px] items-center justify-center">
           <img
-            className="h-full w-full max-h-[350px] object-center object-cover"
+            className="object-center w-full object-contain h-full"
             src={props.image}
             alt="image"
           />

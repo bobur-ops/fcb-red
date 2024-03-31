@@ -81,7 +81,7 @@ const CategoryComponent = ({ portfolioId, data }: CategoryComponentProps) => {
           )}
         </div>
       </div>
-      <div className="grid gap-5 grid-cols-4 mt-2">
+      <div className="grid  grid-cols-4 gap-5 mt-2">
         {images.map((image, index) => (
           <div className="relative h-full">
             <div className="absolute top-5 right-5 z-10">
@@ -96,7 +96,6 @@ const CategoryComponent = ({ portfolioId, data }: CategoryComponentProps) => {
               </Button>
             </div>
             <BaseDropzone
-              dropzoneClassname="h-[320px]"
               key={index}
               image={image}
               onImageUpload={(image) => {
@@ -115,7 +114,6 @@ const CategoryComponent = ({ portfolioId, data }: CategoryComponentProps) => {
           onImageUpload={(value) => {
             setImages((prev) => [...prev, value]);
           }}
-          dropzoneClassname="h-[320px]"
         />
       </div>
     </div>

@@ -23,7 +23,7 @@ export default function AdminLayout() {
   }, [navigate]);
 
   return (
-    <>
+    <div className="bg-gray-50">
       <button
         data-drawer-target="default-sidebar"
         data-drawer-toggle="default-sidebar"
@@ -119,9 +119,14 @@ export default function AdminLayout() {
           </ul>
         </div>
       </aside>
+      <div className="bg-gray-50 border-b sm:ml-64 shadow-sm mb-5">
+        <div className="flex p-4">
+          <div className="text-xl font-medium font-mono">Admin Panel</div>
+        </div>
+      </div>
       <div className="p-4 sm:ml-64 bg-gray-50 min-h-screen">
         <Outlet />
       </div>
-    </>
+    </div>
   );
 }

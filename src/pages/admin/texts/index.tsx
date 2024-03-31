@@ -61,6 +61,15 @@ export default function TextsPage() {
   const handleUploadMainText = () => {
     mutate({ text: mainText, type: "main" });
   };
+  const { mutate: updateMutation } = useUpdateText();
+
+  const handleUpdate = () => {
+    if (!data) return;
+    updateMutation({
+      text: mainText,
+      id: data?.find((item: any) => item.type === "main")?.id,
+    });
+  };
 
   if (isLoading) {
     return (
@@ -84,7 +93,17 @@ export default function TextsPage() {
         <div className="mb-2 flex justify-between items-center">
           <div className="text-2xl mb-2">Основной текст</div>
           <div className="">
-            <Button onClick={handleUploadMainText}>Сохранить</Button>
+            <Button
+              onClick={() => {
+                if (data?.find((item: any) => item.type === "main")) {
+                  handleUpdate();
+                } else {
+                  handleUploadMainText();
+                }
+              }}
+            >
+              Сохранить
+            </Button>
           </div>
         </div>
         <div className="p-5 border">

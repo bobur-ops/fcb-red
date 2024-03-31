@@ -95,7 +95,7 @@ export default function HomePage() {
                 <div className="mx-auto w-[320px]">
                   <img
                     src={item.portfolioImage}
-                    className="object-cover object-center h-[320px] rounded-[25px]"
+                    className="object-contain mx-auto object-center h-[320px] w-full rounded-[25px]"
                   />
                   <div className="mt-[30px] text-[#28C3F2] text-[48px] mb-[22px] underline">
                     {item.name}
